@@ -75,13 +75,13 @@ public class TarefaController {
     @ResponseBody
     public String populate(){
 
-        Tarefa status1=new Tarefa("Fazer a Atividade de DRA");
-        Tarefa status2=new Tarefa("Lavar os Pratos");
-        Tarefa status3=new Tarefa("Limpar a Casa");
+        Tarefa tarefa1=new Tarefa("Fazer a Atividade de DRA");
+        Tarefa tarefa2=new Tarefa("Lavar os Pratos");
+        Tarefa tarefa3=new Tarefa("Limpar a Casa");
 
-        tarefaRepository.save(status1);
-        tarefaRepository.save(status2);
-        tarefaRepository.save(status3);
+        tarefaRepository.save(tarefa1);
+        tarefaRepository.save(tarefa2);
+        tarefaRepository.save(tarefa3);
 
         return "Dados inseridos com sucesso.";
 

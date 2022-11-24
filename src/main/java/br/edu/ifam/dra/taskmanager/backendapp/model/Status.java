@@ -14,7 +14,12 @@ public class Status {
 
     private String descricao;
 
+    public Status(String titulo) {
+        this.titulo = titulo;
+    }
 
+    public Status() {
+    }
 
     //Getters e Setters
 

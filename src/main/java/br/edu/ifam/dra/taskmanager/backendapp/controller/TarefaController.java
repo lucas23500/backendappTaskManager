@@ -1,7 +1,7 @@
 package br.edu.ifam.dra.taskmanager.backendapp.controller;
 
-import br.edu.ifam.dra.taskmanager.backendapp.model.Categoria;
-import br.edu.ifam.dra.taskmanager.backendapp.repository.CategoriaRepository;
+import br.edu.ifam.dra.taskmanager.backendapp.model.Tarefa;
+import br.edu.ifam.dra.taskmanager.backendapp.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -10,17 +10,17 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/categoria")
-public class CategoriaController {
+@RequestMapping("api/tarefa")
+public class TarefaController {
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private TarefaRepository tarefaRepository;
 
     //Create - Cria o Status novo
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@RequestBody Categoria categoria){
+    public String create(@RequestBody Tarefa tarefa){
 
-        categoriaRepository.save(categoria);
+        tarefaRepository.save(tarefa);
 
         return "Salva com sucesso!";
     }
@@ -28,9 +28,9 @@ public class CategoriaController {
     //Find - Encontra pelo ID
     @GetMapping(value="/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Categoria find(@PathVariable Long id){
+    public Tarefa find(@PathVariable Long id){
 
-        Optional<Categoria> status = categoriaRepository.findById(id);
+        Optional<Tarefa> status = tarefaRepository.findById(id);
 
         return status.orElse(null);
 
@@ -40,9 +40,9 @@ public class CategoriaController {
 
     @GetMapping(value="/titulo/{titulo}", produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Categoria findByTitulo(@PathVariable String titulo){
+    public Tarefa findByTitulo(@PathVariable String titulo){
 
-        Optional<Categoria> status = categoriaRepository.findByTituloContaining(titulo);
+        Optional<Tarefa> status = tarefaRepository.findByTituloContaining(titulo);
 
         return status.orElse(null);
 
@@ -52,7 +52,7 @@ public class CategoriaController {
     @ResponseBody
     public String delete(@PathVariable Long id){
 
-        categoriaRepository.deleteById(id);
+        tarefaRepository.deleteById(id);
 
         return "Status excluída!";
     }
@@ -60,10 +60,10 @@ public class CategoriaController {
     //Get - Trazer tudo que tem dentro da tabela Status[Pendente, Atrasado e Concluído]
     @GetMapping(produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Categoria> list(){
-        List<Categoria> status;
+    public List<Tarefa> list(){
+        List<Tarefa> status;
 
-        status = (List<Categoria>) categoriaRepository.findAll();
+        status = (List<Tarefa>) tarefaRepository.findAll();
 
         return status;
     }
@@ -75,13 +75,13 @@ public class CategoriaController {
     @ResponseBody
     public String populate(){
 
-        Categoria status1=new Categoria("Escola");
-        Categoria status2=new Categoria("Trabalho");
-        Categoria status3=new Categoria("Vida Pessoal");
+        Tarefa status1=new Tarefa("Fazer a Atividade de DRA");
+        Tarefa status2=new Tarefa("Lavar os Pratos");
+        Tarefa status3=new Tarefa("Limpar a Casa");
 
-        categoriaRepository.save(status1);
-        categoriaRepository.save(status2);
-        categoriaRepository.save(status3);
+        tarefaRepository.save(status1);
+        tarefaRepository.save(status2);
+        tarefaRepository.save(status3);
 
         return "Dados inseridos com sucesso.";
 

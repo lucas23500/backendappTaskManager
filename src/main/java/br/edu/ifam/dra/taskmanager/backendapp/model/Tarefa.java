@@ -1,5 +1,8 @@
 package br.edu.ifam.dra.taskmanager.backendapp.model;
 
+import br.edu.ifam.dra.taskmanager.backendapp.controller.CategoriaController;
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -15,14 +18,14 @@ public class Tarefa {
 
     private String descricao;
 
-    private LocalDateTime dataPrevista;
+    private String dataPrevista;
 
-    private LocalDateTime dataConclusao;
+    private String dataConclusao;
 
     @ManyToOne
     private Categoria categoria;
 
-    @ManyToOne
+    @OneToOne
     private Status status;
 
     public Tarefa() {
@@ -30,6 +33,15 @@ public class Tarefa {
 
     public Tarefa(String titulo) {
         this.titulo = titulo;
+    }
+
+    public Tarefa(String titulo, String descricao, String dataPrevista, String dataConclusao, Categoria categoria, Status status) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.dataPrevista = dataPrevista;
+        this.dataConclusao = dataConclusao;
+        this.categoria = categoria;
+        this.status = status;
     }
 
     public Long getId() {
@@ -56,19 +68,19 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public LocalDateTime getDataPrevista() {
+    public String getDataPrevista() {
         return dataPrevista;
     }
 
-    public void setDataPrevista(LocalDateTime dataPrevista) {
+    public void setDataPrevista(String dataPrevista) {
         this.dataPrevista = dataPrevista;
     }
 
-    public LocalDateTime getDataConclusao() {
+    public String getDataConclusao() {
         return dataConclusao;
     }
 
-    public void setDataConclusao(LocalDateTime dataConclusao) {
+    public void setDataConclusao(String dataConclusao) {
         this.dataConclusao = dataConclusao;
     }
 
@@ -76,8 +88,9 @@ public class Tarefa {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCategoria(Long categoria) {
+        CategoriaController cc = new CategoriaController();
+        this.categoria = cc.find(categoria);
     }
 
     public Status getStatus() {
@@ -94,8 +107,8 @@ public class Tarefa {
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", dataPrevista=" + dataPrevista +
-                ", dataConclusao=" + dataConclusao +
+                ", dataPrevista='" + dataPrevista + '\'' +
+                ", dataConclusao='" + dataConclusao + '\'' +
                 ", categoria=" + categoria +
                 ", status=" + status +
                 '}';

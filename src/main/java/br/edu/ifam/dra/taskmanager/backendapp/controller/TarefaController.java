@@ -15,13 +15,11 @@ public class TarefaController {
 
     @Autowired
     private TarefaRepository tarefaRepository;
-
-    //Create - Cria o Status novo
+    //Create - Cria o tarefa novo
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public String create(@RequestBody Tarefa tarefa){
 
         tarefaRepository.save(tarefa);
-
         return "Salva com sucesso!";
     }
 
@@ -30,9 +28,8 @@ public class TarefaController {
     @ResponseBody
     public Tarefa find(@PathVariable Long id){
 
-        Optional<Tarefa> status = tarefaRepository.findById(id);
-
-        return status.orElse(null);
+        Optional<Tarefa> tarefa = tarefaRepository.findById(id);
+        return tarefa.orElse(null);
 
     }
 
@@ -42,10 +39,9 @@ public class TarefaController {
     @ResponseBody
     public Tarefa findByTitulo(@PathVariable String titulo){
 
-        Optional<Tarefa> status = tarefaRepository.findByTituloContaining(titulo);
+        Optional<Tarefa> tarefa = tarefaRepository.findByTituloContaining(titulo);
 
-        return status.orElse(null);
-
+        return tarefa.orElse(null);
     }
     //Delete - Remoção dos Campos Repetidos
     @DeleteMapping(value="/{id}")
@@ -54,23 +50,23 @@ public class TarefaController {
 
         tarefaRepository.deleteById(id);
 
-        return "Status excluída!";
+        return "tarefa excluída!";
     }
 
-    //Get - Trazer tudo que tem dentro da tabela Status[Pendente, Atrasado e Concluído]
+    //Get - Trazer tudo que tem dentro da tabela tarefa[Pendente, Atrasado e Concluído]
     @GetMapping(produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Tarefa> list(){
-        List<Tarefa> status;
+        List<Tarefa> tarefa;
 
-        status = (List<Tarefa>) tarefaRepository.findAll();
+        tarefa = (List<Tarefa>) tarefaRepository.findAll();
 
-        return status;
+        return tarefa;
     }
 
 
 
-    //Populate - Criar a primeira tabela
+//    Populate - Criar a primeira tabela
     @GetMapping(value="/populate")
     @ResponseBody
     public String populate(){

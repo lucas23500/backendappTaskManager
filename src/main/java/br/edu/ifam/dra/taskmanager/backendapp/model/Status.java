@@ -18,6 +18,12 @@ public class Status {
         this.titulo = titulo;
     }
 
+    public Status(Long id, String titulo, String descricao) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+    }
+
     public Status() {
     }
 

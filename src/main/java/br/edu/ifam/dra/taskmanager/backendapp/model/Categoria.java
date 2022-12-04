@@ -18,8 +18,15 @@ public class Categoria {
         this.titulo = titulo;
     }
 
+    public Categoria(Long id, String titulo, String descricao) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+    }
+
     public Categoria() {
     }
+
 
     //Getters e Setters
 

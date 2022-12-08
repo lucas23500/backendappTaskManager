@@ -1,10 +1,6 @@
 package br.edu.ifam.dra.taskmanager.backendapp.model;
 
-import br.edu.ifam.dra.taskmanager.backendapp.controller.CategoriaController;
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class Tarefa {
@@ -88,9 +84,8 @@ public class Tarefa {
         return categoria;
     }
 
-    public void setCategoria(Long categoria) {
-        CategoriaController cc = new CategoriaController();
-        this.categoria = cc.find(categoria);
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public Status getStatus() {

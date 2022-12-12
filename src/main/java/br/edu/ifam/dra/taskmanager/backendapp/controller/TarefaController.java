@@ -17,10 +17,9 @@ public class TarefaController {
     private TarefaRepository tarefaRepository;
     //Create - Cria o tarefa novo
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@RequestBody Tarefa tarefa){
+    public void create(@RequestBody Tarefa tarefa){
 
         tarefaRepository.save(tarefa);
-        return "Salva com sucesso!";
     }
 
     //Find - Encontra pelo ID
@@ -60,6 +59,7 @@ public class TarefaController {
         List<Tarefa> tarefa;
 
         tarefa = (List<Tarefa>) tarefaRepository.findAll();
+        System.out.println(tarefa);
 
         return tarefa;
     }

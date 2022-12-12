@@ -18,11 +18,10 @@ public class CategoriaController {
 
     //Create - Cria o Status novo
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@RequestBody Categoria categoria){
+    public void create(@RequestBody Categoria categoria){
 
         categoriaRepository.save(categoria);
 
-        return "Salva com sucesso!";
     }
 
     //Find - Encontra pelo ID
